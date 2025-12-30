@@ -1,0 +1,56 @@
+============================================================
+EXTREME VALIDATION: JIT-compiled Fibonacci
+============================================================
+Fibonacci machine code (37 bytes):
+  83ff017e1d31c0ba01000000b90200000089d601c689d089f2ffc139f97ef289d0c389f8c3
+
+Byte-by-byte breakdown:
+  Offset  Bytes           Meaning
+  ------  --------------  -------------------------
+  0000    83ff01          cmp edi, 1
+  0003    7e1d            jle +29 (to return_n)
+  0005    31c0            xor eax, eax (a=0)
+  0007    ba01000000      mov edx, 1 (b=1)
+  000c    b902000000      mov ecx, 2 (i=2)
+  0011    89d6            mov esi, edx
+  0013    01c6            add esi, eax
+  0015    89d0            mov eax, edx (a=b)
+  0017    89f2            mov edx, esi (b=temp)
+  0019    ffc1            inc ecx
+  001b    39f9            cmp ecx, edi
+  001d    7ef2            jle loop
+  001f    89d0            mov eax, edx (return b)
+  0021    c3              ret
+  0022    89f8            mov eax, edi (return n)
+  0024    c3              ret
+
+Comparing JIT vs Python Fibonacci:
+----------------------------------------
+  fib( 0) =     0 (Python:     0) ✓
+  fib( 1) =     1 (Python:     1) ✓
+  fib( 2) =     1 (Python:     1) ✓
+  fib( 3) =     2 (Python:     2) ✓
+  fib( 4) =     3 (Python:     3) ✓
+  fib( 5) =     5 (Python:     5) ✓
+  fib( 6) =     8 (Python:     8) ✓
+  fib( 7) =    13 (Python:    13) ✓
+  fib( 8) =    21 (Python:    21) ✓
+  fib( 9) =    34 (Python:    34) ✓
+  fib(10) =    55 (Python:    55) ✓
+  fib(11) =    89 (Python:    89) ✓
+  fib(12) =   144 (Python:   144) ✓
+  fib(13) =   233 (Python:   233) ✓
+  fib(14) =   377 (Python:   377) ✓
+  fib(15) =   610 (Python:   610) ✓
+  fib(16) =   987 (Python:   987) ✓
+  fib(17) =  1597 (Python:  1597) ✓
+  fib(18) =  2584 (Python:  2584) ✓
+  fib(19) =  4181 (Python:  4181) ✓
+----------------------------------------
+🎉 ALL 20 VALUES MATCH!
+   We successfully JIT-compiled Fibonacci to x86-64!
+
+Performance comparison (fib(30) x 100000):
+  JIT:    0.0303s
+  Python: 0.0745s
+  Speedup: 2.5x faster

@@ -1,0 +1,141 @@
+======================================================================
+ EXPERIMENT 002: Self-Modifying Code via /proc/self/mem
+======================================================================
+
+[PART 1] Reading our own process memory...
+--------------------------------------------------
+PID: 2224
+
+Memory map (first 20 lines):
+  00400000-0041f000 r--p 00000000 fe:00 167284                             /usr/bin/python3.11
+  0041f000-006e1000 r-xp 0001f000 fe:00 167284                             /usr/bin/python3.11
+  006e1000-00953000 r--p 002e1000 fe:00 167284                             /usr/bin/python3.11
+  00953000-00954000 r--p 00552000 fe:00 167284                             /usr/bin/python3.11
+  00954000-00a93000 rw-p 00553000 fe:00 167284                             /usr/bin/python3.11
+  00a93000-00ad8000 rw-p 00000000 00:00 0 
+  0100e000-011b4000 rw-p 00000000 00:00 0                                  [heap]
+  7fc65b76e000-7fc65b86e000 rw-p 00000000 00:00 0 
+  7fc65b86e000-7fc65b870000 r--p 00000000 fe:00 188885                     /usr/lib/x86_64-linux-gnu/libffi.so.8.1.0
+  7fc65b870000-7fc65b877000 r-xp 00002000 fe:00 188885                     /usr/lib/x86_64-linux-gnu/libffi.so.8.1.0
+  7fc65b877000-7fc65b878000 r--p 00009000 fe:00 188885                     /usr/lib/x86_64-linux-gnu/libffi.so.8.1.0
+  7fc65b878000-7fc65b879000 ---p 0000a000 fe:00 188885                     /usr/lib/x86_64-linux-gnu/libffi.so.8.1.0
+  7fc65b879000-7fc65b87a000 r--p 0000a000 fe:00 188885                     /usr/lib/x86_64-linux-gnu/libffi.so.8.1.0
+  7fc65b87a000-7fc65b87b000 rw-p 0000b000 fe:00 188885                     /usr/lib/x86_64-linux-gnu/libffi.so.8.1.0
+  7fc65b87b000-7fc65b881000 r--p 00000000 fe:00 186474                     /usr/lib/python3.11/lib-dynload/_ctypes.cpython-311-x86_64-linux-gnu.so
+  7fc65b881000-7fc65b893000 r-xp 00006000 fe:00 186474                     /usr/lib/python3.11/lib-dynload/_ctypes.cpython-311-x86_64-linux-gnu.so
+  7fc65b893000-7fc65b899000 r--p 00018000 fe:00 186474                     /usr/lib/python3.11/lib-dynload/_ctypes.cpython-311-x86_64-linux-gnu.so
+  7fc65b899000-7fc65b89a000 r--p 0001d000 fe:00 186474                     /usr/lib/python3.11/lib-dynload/_ctypes.cpython-311-x86_64-linux-gnu.so
+  7fc65b89a000-7fc65b89e000 rw-p 0001e000 fe:00 186474                     /usr/lib/python3.11/lib-dynload/_ctypes.cpython-311-x86_64-linux-gnu.so
+  7fc65b89e000-7fc65ba00000 rw-p 00000000 00:00 0 
+
+✓ Found 4 executable code sections
+  0x41f000-0x6e1000 r-xp /usr/bin/python3.11
+  0x7fc65b881000-0x7fc65b893000 r-xp /usr/lib/python3.11/lib-dynload/_ctypes.cpython-311-x86_64-linux-gnu.so
+  0x7fc65ba28000-0x7fc65bbbd000 r-xp /usr/lib/x86_64-linux-gnu/libc.so.6
+  0x7fc65bc39000-0x7fc65bc3c000 r-xp /usr/lib/python3.11/lib-dynload/mmap.cpython-311-x86_64-linux-gnu.so
+
+======================================================================
+[PART 2] Reading actual machine code from memory...
+--------------------------------------------------
+Target section: /usr/bin/python3.11
+Address range: 0x41f000 - 0x6e1000
+
+✓ Successfully read 64 bytes of machine code!
+First 64 bytes (hex):
+  f3 0f 1e fa 48 83 ec 08 48 8b 05 e1 4f 53 00 48 85 c0 74 02 ff d0 48 83 c4 08 c3 00 00 00 00 00 ff 35 e2 4f 53 00 f2 ff 25 e3 4f 53 00 0f 1f 00 f3 0f 1e fa 68 00 00 00 00 f2 e9 e1 ff ff ff 90
+
+Raw bytes as potential x86-64 instructions:
+  +0000: f3 0f 1e fa 48 83 ec 08
+  +0008: 48 8b 05 e1 4f 53 00 48
+  +0010: 85 c0 74 02 ff d0 48 83
+  +0018: c4 08 c3 00 00 00 00 00
+
+======================================================================
+[PART 3] Attempting to WRITE to executable memory...
+--------------------------------------------------
+Attempting write to: 0x41f000
+✓ Write operation completed without error!
+✓ VERIFIED: Memory was actually modified!
+
+======================================================================
+[PART 4] Creating executable memory via mmap...
+--------------------------------------------------
+Creating executable memory region...
+✓ Allocated 4096 bytes of RWX memory
+✓ Wrote shellcode: b82a000000c3
+✓ Executable memory at: 0x7fc65bf12000
+
+Calling shellcode (should return 42)...
+✓ RESULT: 42
+🎉 SUCCESS! We executed raw machine code from Python!
+
+--------------------------------------------------
+Now modifying the code in-place...
+✓ Overwrote with new shellcode: b839050000c3
+Calling SAME function pointer (should now return 1337)...
+✓ RESULT: 1337
+🎉🎉 HOLY SHIT! Self-modifying code WORKS!
+   We changed what a function does WHILE THE PROGRAM IS RUNNING!
+
+======================================================================
+[PART 5] Self-modifying loop (code changes itself mid-execution)...
+--------------------------------------------------
+Running self-modifying loop (10 iterations):
+Each iteration, we patch the return value in the machine code itself
+
+  Iteration 0: returned 0, patched code to return 100
+  Iteration 1: returned 100, patched code to return 200
+  Iteration 2: returned 200, patched code to return 300
+  Iteration 3: returned 300, patched code to return 400
+  Iteration 4: returned 400, patched code to return 500
+  Iteration 5: returned 500, patched code to return 600
+  Iteration 6: returned 600, patched code to return 700
+  Iteration 7: returned 700, patched code to return 800
+  Iteration 8: returned 800, patched code to return 900
+  Iteration 9: returned 900, patched code to return 1000
+  Final call: returned 1000
+
+✓ All results: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+🎉🎉🎉 PERFECT! Code successfully modified itself during execution!
+
+======================================================================
+[PART 6] JIT-compiling a Python expression to machine code...
+--------------------------------------------------
+JIT-compiling and executing math expressions:
+
+  ✓ 1 + 2 * 3 = 7 (expected: 7)
+    Machine code: b801000000b902000000ba030000000fafca01c8c3
+  ✓ 10 + 5 * 4 = 30 (expected: 30)
+    Machine code: b80a000000b905000000ba040000000fafca01c8c3
+  ✓ 100 + 0 * 999 = 100 (expected: 100)
+    Machine code: b864000000b900000000bae70300000fafca01c8c3
+  ✓ 0 + 7 * 8 = 56 (expected: 56)
+    Machine code: b800000000b907000000ba080000000fafca01c8c3
+
+🎉🎉🎉🎉 WE BUILT A MINI JIT COMPILER!
+   Python generated x86-64 machine code and executed it!
+
+======================================================================
+ EXPERIMENT SUMMARY
+======================================================================
+
+What we proved:
+1. ✓ Can read our own process memory via /proc/self/mem
+2. ✓ Can inspect actual machine code bytes in memory
+3. ? Writing to code sections is blocked (as expected)
+4. ✓ Can create RWX memory regions via mmap
+5. ✓ Can execute arbitrary machine code from Python
+6. ✓ Can MODIFY code while the program is running
+7. ✓ Can build a mini JIT compiler in ~50 lines
+
+This is how:
+- JavaScript V8 engine works
+- Java HotSpot JIT works  
+- LuaJIT works
+- PyPy's JIT works
+- Game engine scripting works
+- Malware polymorphism works (yikes)
+
+The "impossible" thing that's actually possible:
+Code isn't static. A running program can rewrite its own instructions.
+

@@ -1,0 +1,15 @@
+============================================================
+VALIDATION: Proving RWX memory and code execution
+============================================================
+Written bytes:  b8efbeaddec3
+Read back:      b8efbeaddec3
+Match: True
+
+Executed function returned: 0xdeadbeef
+Expected: 0xdeadbeef
+Match: True
+
+RWX memory region found in /proc/2233/maps:
+  7fd183d6c000-7fd183d6d000 rwxp 00000000 00:00 0
+
+✓ Validation complete
