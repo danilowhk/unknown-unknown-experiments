@@ -1,0 +1,10 @@
+                 w _ITM_deregisterTMCloneTable
+                 w _ITM_registerTMCloneTable
+                 w __cxa_finalize@GLIBC_2.2.5
+                 w __gmon_start__
+                 U __stack_chk_fail@GLIBC_2.4
+0000000000001120 T add
+00000000000011c0 T compute_pi
+0000000000001130 T factorial
+00000000000011b0 T get_cpu_cycles
+0000000000001170 T get_stack_address

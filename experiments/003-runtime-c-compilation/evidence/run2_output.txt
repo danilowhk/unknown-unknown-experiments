@@ -1,0 +1,128 @@
+================================================================================
+EXPERIMENT: Runtime C Code Generation and Compilation
+================================================================================
+
+[STEP 1] Generating C source code...
+Generated C source code:
+--------------------------------------------------------------------------------
+
+#include <stdio.h>
+#include <math.h>
+#include <time.h>
+
+// A simple function that adds two numbers
+int add(int a, int b) {
+    return a + b;
+}
+
+// A more complex function that calculates factorial
+long long factorial(int n) {
+    if (n <= 1) return 1;
+    long long result = 1;
+    for (int i = 2; i <= n; i++) {
+        result *= i;
+    }
+    return result;
+}
+
+// A function that does something "impossible" - direct memory manipulation
+unsigned long get_stack_address() {
+    int local_var;
+    return (unsigned long)&local_var;
+}
+
+// A function that uses CPU timestamp counter (very low-level)
+unsigned long long get_cpu_cycles() {
+    unsigned int lo, hi;
+    __asm__ __volatile__ ("rdtsc" : "=a" (lo), "=d" (hi));
+    return ((unsigned long long)hi << 32) | lo;
+}
+
+// A computationally intensive function to show real C performance
+double compute_pi(int iterations) {
+    double pi = 0.0;
+    for (int i = 0; i < iterations; i++) {
+        pi += (i % 2 == 0 ? 1.0 : -1.0) / (2 * i + 1);
+    }
+    return pi * 4.0;
+}
+
+--------------------------------------------------------------------------------
+
+[STEP 2] Writing C source to temporary file...
+C source written to: /tmp/runtime_c_0lzwzyu_/generated.c
+Will compile to: /tmp/runtime_c_0lzwzyu_/generated.so
+
+[STEP 3] Compiling C code with GCC...
+Compile command: gcc -shared -fPIC -O2 -o /tmp/runtime_c_0lzwzyu_/generated.so /tmp/runtime_c_0lzwzyu_/generated.c
+Compilation took: 0.0634 seconds
+✓ Compilation successful!
+
+[STEP 4] Verifying compiled library...
+✓ Shared library created: /tmp/runtime_c_0lzwzyu_/generated.so
+  File size: 15728 bytes
+  File type: /tmp/runtime_c_0lzwzyu_/generated.so: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, BuildID[sha1]=83a90f45c25270c40b703fd78d89b4b5c83a4dd9, not stripped
+
+[STEP 5] Loading compiled library into Python...
+✓ Library loaded successfully!
+
+[STEP 6] Defining function signatures...
+✓ Function signatures defined
+
+[STEP 7] Calling C functions from Python...
+================================================================================
+
+Test 1: add(42, 58)
+Result: 100
+✓ Correct!
+
+Test 2: factorial(20)
+Result: 2432902008176640000
+✓ Correct!
+
+Test 3: get_stack_address() - Low-level memory access
+First call:  0x00007ffc41e6c5d4
+Second call: 0x00007ffc41e6c5d4
+Difference:  0 bytes
+✓ Successfully accessed stack memory addresses!
+
+Test 4: get_cpu_cycles() - Direct CPU instruction (RDTSC)
+Before work: 338723718822
+After work:  338724085522
+CPU cycles elapsed: 366700
+✓ Successfully executed x86 assembly instruction!
+
+Test 5: compute_pi(10000000) - Performance comparison
+Computing π using 10 million iterations...
+Result: 3.1415925536
+C execution time: 0.012688 seconds
+
+Comparing with pure Python implementation...
+Result: 3.1415925536
+Python execution time: 1.243655 seconds
+C is 98.02x faster!
+✓ C code is significantly faster!
+
+================================================================================
+EXPERIMENT COMPLETE!
+================================================================================
+
+SUMMARY:
+✓ Generated C source code from Python string
+✓ Wrote C code to file
+✓ Compiled C code into shared library using GCC
+✓ Loaded compiled library dynamically
+✓ Called C functions from Python
+✓ Verified correct execution
+✓ Demonstrated low-level CPU access
+✓ Showed performance advantage of compiled code
+
+Temporary files location: /tmp/runtime_c_0lzwzyu_
+(Files will be cleaned up on next reboot)
+
+CONCLUSION: YES, Python can generate, compile, and execute C code at runtime!
+This opens up possibilities for:
+  - JIT compilation for performance-critical code
+  - Dynamic code generation based on runtime conditions
+  - Self-optimizing programs
+  - Runtime hardware-specific optimizations

@@ -1,0 +1,13 @@
+/tmp/runtime_c_0lzwzyu_:
+total 28K
+drwx------  2 ubuntu ubuntu 4.0K Dec 30 19:03 .
+drwxrwxrwt 15 root   root   4.0K Dec 30 19:03 ..
+-rw-rw-r--  1 ubuntu ubuntu 1022 Dec 30 19:03 generated.c
+-rwxrwxr-x  1 ubuntu ubuntu  16K Dec 30 19:03 generated.so
+
+/tmp/runtime_c_ylgdmsyp:
+total 28K
+drwx------  2 ubuntu ubuntu 4.0K Dec 30 19:03 .
+drwxrwxrwt 15 root   root   4.0K Dec 30 19:03 ..
+-rw-rw-r--  1 ubuntu ubuntu 1022 Dec 30 19:03 generated.c
+-rwxrwxr-x  1 ubuntu ubuntu  16K Dec 30 19:03 generated.so
