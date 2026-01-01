@@ -1,0 +1,91 @@
+
+============================================================
+EXECUTABLE IMAGE EXPERIMENT
+Can we run code extracted from a PNG image?
+============================================================
+
+Creating x86-64 shellcode...
+✓ Shellcode created (49 bytes)
+
+============================================================
+STEP 1: ENCODING MACHINE CODE INTO IMAGE
+============================================================
+
+Code size: 49 bytes
+Code (hex): 48c7c00100000048c7c701000000488d350a00000048c7c2120000000f05c348656c6c6f2066726f6d20696d616765210a
+
+Image dimensions: 8x7 pixels
+
+✓ Code encoded into image: /home/ubuntu/unknown-unknown-experiments/experiments/004-executable-image/evidence/executable_code.png
+✓ Image saved successfully
+
+============================================================
+STEP 2: EXTRACTING MACHINE CODE FROM IMAGE
+============================================================
+
+Image dimensions: 8x7 pixels
+
+Extracted 49 bytes
+Code (hex): 48c7c00100000048c7c701000000488d350a00000048c7c2120000000f05c348656c6c6f2066726f6d20696d616765210a
+
+✓ Extraction successful - byte count matches
+
+✓ VERIFIED: Extracted code matches original perfectly
+
+============================================================
+STEP 3: EXECUTING CODE FROM IMAGE
+============================================================
+
+⚠️  WARNING: About to execute code extracted from an image!
+
+✓ Allocated 49 bytes of executable memory
+✓ Copied code into memory
+
+Memory address: 0x7fd2b771a000
+
+Executing code...
+------------------------------------------------------------
+Hello from image!
+
+------------------------------------------------------------
+
+✓ Code executed successfully!
+✓ The message above was printed by code extracted from an image!
+============================================================
+STEP 4: CREATING VISUAL PROOF
+============================================================
+
+✓ Created zoomed image: /home/ubuntu/unknown-unknown-experiments/experiments/004-executable-image/evidence/executable_code_zoomed.png
+  (Each pixel contains one byte of machine code)
+
+============================================================
+EXPERIMENT SUMMARY
+============================================================
+
+✓ VALIDATED: We successfully executed code from an image!
+
+What this means:
+  • Images can contain executable machine code
+  • Pixel data can be interpreted as instructions
+  • A PNG file literally RAN and printed text
+
+Confidence: 🟢 CONFIRMED
+
+This is possible because:
+  1. Images are just bytes in memory
+  2. CPUs don't care where code comes from
+  3. With proper permissions, any bytes can execute
+
+Real-world implications:
+  • Novel steganography technique
+  • Potential security vector (malicious images)
+  • Code obfuscation method
+  • Polyglot file format attacks
+
+Evidence saved to:
+  /home/ubuntu/unknown-unknown-experiments/experiments/004-executable-image/evidence/
+
+Files:
+  • executable_code.png - The image containing machine code
+  • executable_code_zoomed.png - Zoomed view of pixels
+============================================================
