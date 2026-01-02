@@ -29,6 +29,7 @@ The weirder the better. The more "I had no idea you could do that" the better.
 
 | # | Name | Date | Score | Status |
 |---|------|------|-------|--------|
+| 005 | [Executing Python Code from Audio Waveforms](./experiments/005-audio-executable/) | 2026-01-01 | 9/10 | 🟢 |
 | 004 | [Executing Machine Code from a PNG Image](./experiments/004-executable-image/) | 2026-01-01 | 10/10 | 🟢 |
 | 003 | [Runtime C Compilation](./experiments/003-runtime-c-compilation/) | 2025-12-31 | 9/10 | 🟢 |
 | 002 | [Self-Modifying Code via In-Memory Execution](./experiments/002-self-modifying-memory/) | 2025-12-30 | 10/10 | 🟢 |

@@ -1,0 +1,14 @@
+Audio File Information
+============================================================
+
+File: /home/ubuntu/unknown-unknown-experiments/experiments/005-audio-executable/evidence/executable_code.wav
+Size: 496 bytes
+
+WAV Parameters:
+  Channels: 1
+  Sample width: 1 bytes
+  Frame rate: 44100 Hz
+  Number of frames: 452
+  Duration: 0.0102 seconds
+
+This audio file contains executable Python bytecode!

@@ -1,0 +1,175 @@
+
+============================================================
+AUDIO EXECUTABLE EXPERIMENT
+Can we execute Python code encoded in audio waveforms?
+============================================================
+
+============================================================
+STEP 1: CREATING PYTHON FUNCTION TO ENCODE
+============================================================
+
+Function definition:
+------------------------------------------------------------
+def audio_function():
+    """This function was encoded in audio and executed!"""
+    import time
+    timestamp = time.time()
+    message = f"🎵 Hello from audio waveform! Executed at {timestamp}"
+    return message
+------------------------------------------------------------
+
+Function bytecode size: 452 bytes
+Bytecode (first 50 bytes hex): e30000000000000000000000000200000013000000f3400000009700640164026c007d007c00a00000000000000000000000
+
+Bytecode disassembly (human-readable):
+------------------------------------------------------------
+ 40           0 RESUME                   0
+
+ 42           2 LOAD_CONST               1 (0)
+              4 LOAD_CONST               2 (None)
+              6 IMPORT_NAME              0 (time)
+              8 STORE_FAST               0 (time)
+
+ 43          10 LOAD_FAST                0 (time)
+             12 LOAD_METHOD              0 (time)
+             34 PRECALL                  0
+             38 CALL                     0
+             48 STORE_FAST               1 (timestamp)
+
+ 44          50 LOAD_CONST               3 ('🎵 Hello from audio waveform! Executed at ')
+             52 LOAD_FAST                1 (timestamp)
+             54 FORMAT_VALUE             0
+             56 BUILD_STRING             2
+             58 STORE_FAST               2 (message)
+
+ 45          60 LOAD_FAST                2 (message)
+             62 RETURN_VALUE
+------------------------------------------------------------
+
+Executing ORIGINAL function (for comparison):
+------------------------------------------------------------
+🎵 Hello from audio waveform! Executed at 1767312411.030443
+------------------------------------------------------------
+
+============================================================
+STEP 2: ENCODING BYTECODE INTO AUDIO
+============================================================
+
+Input: 452 bytes of Python bytecode
+
+Audio format:
+  Sample rate: 44100 Hz
+  Channels: 1 (mono)
+  Sample width: 1 byte (8-bit)
+  Duration: 0.0102 seconds
+
+✓ Audio file created: /home/ubuntu/unknown-unknown-experiments/experiments/005-audio-executable/evidence/executable_code.wav
+✓ File size: 496 bytes
+
+Verification - WAV file parameters:
+  Channels: 1
+  Sample width: 1 bytes
+  Frame rate: 44100 Hz
+  Number of frames: 452
+  Compression: NONE
+
+============================================================
+STEP 3: EXTRACTING BYTECODE FROM AUDIO
+============================================================
+
+Reading audio file: /home/ubuntu/unknown-unknown-experiments/experiments/005-audio-executable/evidence/executable_code.wav
+
+Audio parameters:
+  Sample rate: 44100 Hz
+  Channels: 1
+  Sample width: 1 bytes
+  Frame count: 452
+
+Extracted 452 bytes
+Bytecode (first 50 bytes hex): e30000000000000000000000000200000013000000f3400000009700640164026c007d007c00a00000000000000000000000
+
+============================================================
+VERIFICATION
+============================================================
+
+✓ VERIFIED: Extracted bytecode matches original perfectly!
+  Original size: 452 bytes
+  Extracted size: 452 bytes
+  Byte-for-byte match: YES
+
+============================================================
+STEP 4: EXECUTING CODE FROM AUDIO
+============================================================
+
+⚠️  WARNING: About to execute code extracted from an audio file!
+
+✓ Successfully unmarshaled bytecode to code object
+
+Code object details:
+  Name: audio_function
+  Argument count: 0
+  Local variables: 3
+  Stack size: 2
+  Constants: ('This function was encoded in audio and executed!', 0, None, '🎵 Hello from audio waveform! Executed at ')
+
+✓ Created function from code object
+
+Executing function extracted from audio...
+------------------------------------------------------------
+🎵 Hello from audio waveform! Executed at 1767312411.0308003
+------------------------------------------------------------
+
+✓ Function executed successfully!
+✓ Return value: 🎵 Hello from audio waveform! Executed at 1767312411.0308003
+
+✓ Result saved to: /home/ubuntu/unknown-unknown-experiments/experiments/005-audio-executable/evidence/execution_result.txt
+
+============================================================
+STEP 5: CREATING VISUAL PROOF
+============================================================
+
+✓ Created bytecode hex dump: /home/ubuntu/unknown-unknown-experiments/experiments/005-audio-executable/evidence/bytecode_hex.txt
+✓ Created audio info file: /home/ubuntu/unknown-unknown-experiments/experiments/005-audio-executable/evidence/audio_info.txt
+
+============================================================
+EXPERIMENT SUMMARY
+============================================================
+
+✓ VALIDATED: We successfully executed code from an audio file!
+
+What this means:
+  • Audio files can contain executable Python bytecode
+  • Waveform data can be interpreted as code
+  • A WAV file literally RAN and returned a value
+  • The audio would sound like noise if played
+
+Confidence: 🟢 CONFIRMED
+
+This is possible because:
+  1. Audio samples are just bytes in memory
+  2. Python bytecode is also just bytes
+  3. marshal can reconstruct code objects from bytes
+  4. Functions can be created from code objects
+
+Real-world implications:
+  • Novel steganography technique
+  • Code can be hidden in audio files
+  • Potential security vector (malicious audio)
+  • Polyglot file format attacks
+  • Audio-based code distribution
+
+Key difference from image experiment:
+  • Images used machine code (x86 assembly)
+  • This uses Python bytecode (higher level)
+  • Both prove: any file format can carry executable code
+
+Evidence saved to:
+  /home/ubuntu/unknown-unknown-experiments/experiments/005-audio-executable/evidence/
+
+Files:
+  • executable_code.wav - Audio file containing Python bytecode
+  • execution_result.txt - Output from executed code
+  • bytecode_hex.txt - Hex dump of the bytecode
+  • audio_info.txt - Audio file metadata
+
+============================================================
