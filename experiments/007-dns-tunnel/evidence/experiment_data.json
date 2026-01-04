@@ -1,0 +1,84 @@
+{
+  "timestamp": "2026-01-03T19:06:36.058930",
+  "experiments": [
+    {
+      "name": "DNS Query Structure",
+      "domain": "example.com",
+      "query_size": 29,
+      "query_hex": "123401000001000000000000076578616d706c6503636f6d0000010001"
+    },
+    {
+      "name": "Data Encoding",
+      "original_data": "Hello, DNS Tunnel!",
+      "base32_encoded": "jbswy3dpfqqeitstebkhk3tomvwcc",
+      "hex_encoded": "48656c6c6f2c20444e532054756e6e656c21",
+      "long_data_chunks": 4
+    },
+    {
+      "name": "DNS Response Data",
+      "a_record_encoding": {
+        "data": "HTTP/1.1 200 OK",
+        "ip_records": [
+          "72.84.84.80",
+          "47.49.46.49",
+          "32.50.48.48",
+          "32.79.75.0"
+        ],
+        "decoded": "HTTP/1.1 200 OK"
+      },
+      "txt_record_encoding": {
+        "data": "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<h1>Hello from DNS!</h1>",
+        "encoded": "SFRUUC8xLjEgMjAwIE9LDQpDb250ZW50LVR5cGU6IHRleHQvaHRtbA0KDQo8aDE+SGVsbG8gZnJvbSBETlMhPC9oMT4=",
+        "chunks": 1
+      }
+    },
+    {
+      "name": "Bidirectional DNS Tunnel",
+      "request": {
+        "original": "GET / HTTP/1.1\r\nHost: example.com\r\n\r\n",
+        "encoded": "i5cviibpebefivcqf4ys4minbjeg643uhiqgk6dbnvygyzjomnxw2dikbufa",
+        "dns_query": "i5cviibpebefivcqf4ys4minbjeg643uhiqgk6dbnvygyzjomnxw2dikbufa.tunnel.example.com",
+        "query_length": 79
+      },
+      "response": {
+        "original": "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: 50\r\n\r\n<html><body><h1>Hello from DNS Tunnel!</h1></body>",
+        "encoded": "SFRUUC8xLjEgMjAwIE9LDQpDb250ZW50LVR5cGU6IHRleHQvaHRtbA0KQ29udGVudC1MZW5ndGg6IDUwDQoNCjxodG1sPjxib2R5PjxoMT5IZWxsbyBmcm9tIEROUyBUdW5uZWwhPC9oMT48L2JvZHk+",
+        "decoded": "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: 50\r\n\r\n<html><body><h1>Hello from DNS Tunnel!</h1></body>",
+        "match": true
+      }
+    },
+    {
+      "name": "Real DNS Tunnel Test",
+      "results": [
+        {
+          "domain": "google.com",
+          "success": true,
+          "response_size": 875,
+          "answer_count": 12,
+          "query_time_ms": 11.042594909667969
+        },
+        {
+          "domain": "github.com",
+          "success": true,
+          "response_size": 1737,
+          "answer_count": 19,
+          "query_time_ms": 6.742715835571289
+        },
+        {
+          "domain": "cloudflare.com",
+          "success": true,
+          "response_size": 2017,
+          "answer_count": 0,
+          "query_time_ms": 13.157367706298828
+        }
+      ]
+    },
+    {
+      "name": "Performance Analysis",
+      "max_data_per_query": 118,
+      "max_data_per_response": 765,
+      "estimated_upload_kbps": 9.44,
+      "estimated_download_kbps": 61.2
+    }
+  ]
+}

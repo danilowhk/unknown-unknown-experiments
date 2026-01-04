@@ -1,0 +1,39 @@
+=== External Verification Using dig ===
+
+Testing DNS TXT records for google.com:
+"v=spf1 include:_spf.google.com ~all"
+"cisco-ci-domain-verification=47c38bc8c4b74b7233e9053220c1bbe76bcc1cd33c7acf7acd36cd6a5332004b"
+"MS=E4A68B9AB2BB9670BCE15412F62916164C0B20BB"
+"google-site-verification=wD8N7i1JTNTkezJ49swvWW48f8_9xveREV4oB-0Hf5o"
+"facebook-domain-verification=22rm551cu4k0ab0bxsw536tlds4h95"
+"docusign=1b0a6754-49b1-4db5-8540-d2c12664b289"
+"docusign=05958488-4752-4ef2-95eb-aa7ba8a3bd0e"
+"google-site-verification=TV9-DBe4R80X4v0M4U_bd_J9cpOJM0nikft0jAgjmsQ"
+"globalsign-smime-dv=CDYX+XFHUw2wml6/Gb8+59BsH31KzUr6c1l2BPvqKX8="
+"apple-domain-verification=30afIBcvSuDV2PLX"
+"google-site-verification=4ibFUgB-wXLQ_S7vsXVomSTVamuOXBiVAzpR5IZ87D0"
+"onetrust-domain-verification=de01ed21f2fa4d8781cbc3ffb89cf4ef"
+
+Testing DNS TXT records for github.com:
+"stripe-verification=f88ef17321660a01bab1660454192e014defa29ba7b8de9633c69d6b4912217f"
+"docusign=087098e3-3d46-47b7-9b4e-8a23028154cd"
+"jamf-site-verification=XtaPNIYghF_e_xRDI8CjgQ"
+"apple-domain-verification=RyQhdzTl6Z6x8ZP4"
+"google-site-verification=UTM-3akMgubp6tQtgEuAkYNYLyYAvpTnnSrDMWoDR3o"
+"MS=ms44452932"
+"krisp-domain-verification=ZlyiK7XLhnaoUQb2hpak1PLY7dFkl1WE"
+"MS=6BF03E6AF5CB689E315FB6199603BABF2C88D805"
+"MS=ms58704441"
+"adobe-idp-site-verification=b92c9e999aef825edc36e0a3d847d2dbad5b2fc0e05c79ddd7a16139b48ecf4b"
+"shopify-verification-code=t1YPwcmvnxZyBycaCpk1MPyWoFs72o"
+"TAILSCALE-xOzoDvFUzZr5YYVCQFuD"
+"miro-verification=d2e174fdb00c71e0bcf58f8e58c3da2dd80dcfa9"
+"calendly-site-verification=at0DQARi7IZvJtXQAWhMqpmIzpvoBNF7aam5VKKxP"
+"atlassian-domain-verification=jjgw98AKv2aeoYFxiL/VFaoyPkn3undEssTRuMg6C/3Fp/iqhkV4HVV7WjYlVeF8"
+"google-site-verification=82Le34Flgtd15ojYhHlGF_6g72muSjamlMVThBOJpks"
+"loom-site-verification=f3787154f1154b7880e720a511ea664d"
+"v=spf1 ip4:192.30.252.0/22 include:_netblocks.google.com include:_netblocks2.google.com include:_netblocks3.google.com include:spf.protection.outlook.com include:mail.zendesk.com include:_spf.salesforce.com include:servers.mcsv.net include:mktomail.com ip" "4:62.253.227.114 ip4:166.78.69.169 ip4:166.78.69.170 ip4:166.78.71.131 ip4:167.89.101.2 ip4:167.89.101.192/28 ip4:192.254.112.60 ip4:192.254.112.98/31 ip4:192.254.113.10 ip4:192.254.113.101 ip4:192.254.114.176  ~all"
+"facebook-domain-verification=39xu4jzl7roi7x0n93ldkxjiaarx50"
+
+This proves that DNS servers do return data in TXT records,
+which can be used for tunneling arbitrary data.
