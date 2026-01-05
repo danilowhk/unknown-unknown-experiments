@@ -1,0 +1,70 @@
+======================================================================
+QUANTUM RANDOM NUMBER CRYPTOGRAPHIC KEY GENERATION
+======================================================================
+Start Time: 2026-01-04T19:04:31.467835
+
+
+[ATTEMPT 1: ANU QRNG]
+[2026-01-04T19:04:31.467853] Requesting 512 quantum random bits...
+Source: ANU Quantum Random Numbers Server (Australian National University)
+Method: Measuring quantum vacuum fluctuations in a beam of light
+
+API Request: https://qrng.anu.edu.au/API/jsonI.php
+Parameters: {
+  "length": 64,
+  "type": "uint8"
+}
+
+HTTP Status: 200
+Response Headers: {'Date': 'Mon, 05 Jan 2026 00:04:33 GMT', 'Server': 'Apache', 'Access-Control-Allow-Origin': '*', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Transfer-Encoding': 'chunked', 'Content-Type': 'application/json'}
+
+Raw Response Body:
+{"type":"uint8","length":64,"data":[27,253,142,246,209,56,174,236,36,236,51,43,76,254,206,246,9,26,157,104,4,178,190,106,81,116,103,203,11,22,187,127,63,150,199,22,140,112,147,80,229,114,46,179,115,105,63,237,13,194,32,218,224,158,71,222,27,48,118,228,26,186,202,59],"success":true}
+
+
+✓ SUCCESS! Received 512 quantum random bits from ANU
+First 64 bits (binary): 0001101111111101100011101111011011010001001110001010111011101100
+First 16 bytes (hex): 1bfd8ef6d138aeec24ec332b4cfecef6
+
+======================================================================
+GENERATING CRYPTOGRAPHIC KEYS FROM ANU_QRNG
+======================================================================
+
+AES-256 Key (32 bytes):
+  Hex: 1bfd8ef6d138aeec24ec332b4cfecef6091a9d6804b2be6a517467cb0b16bb7f
+  Binary: 0001101111111101100011101111011011010001001110001010111011101100... (truncated)
+
+SHA-256 Derived Key:
+  Hex: f7dc353f27746deeeb40fa62f60952bb471a040f6bb27cb8cdff6e44d9c4603a
+
+RSA Key Seed (64 bytes):
+  Hex: 1bfd8ef6d138aeec24ec332b4cfecef6091a9d6804b2be6a517467cb0b16bb7f... (truncated)
+
+Quantum UUID:
+  1bfd8ef6-d138-aeec-24ec-332b4cfecef6
+
+
+======================================================================
+RANDOMNESS QUALITY TESTS - ANU_QRNG
+======================================================================
+
+Bit Distribution:
+  Total bits: 512
+  Ones:  269 (52.54%)
+  Zeros: 243 (47.46%)
+  Expected: ~50% each for true randomness
+
+Chi-Square Statistic: 1.3203
+  (Lower is better, <3.84 indicates good randomness at 95% confidence)
+
+Pattern Check:
+  '00000000' appears: 1 times
+  '11111111' appears: 2 times
+  '01010101' appears: 0 times
+  '10101010' appears: 0 times
+
+======================================================================
+✓ Evidence saved to: ../evidence/quantum_keys.json
+======================================================================
+
+End Time: 2026-01-04T19:04:34.819161
