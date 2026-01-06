@@ -29,6 +29,7 @@ The weirder the better. The more "I had no idea you could do that" the better.
 
 | # | Name | Date | Score | Status |
 |---|------|------|-------|--------|
+| 009 | [Steganography in Code via Invisible Whitespace](./experiments/009-steganography-in-code/) | 2026-01-06 | 9/10 | 🟢 |
 | 008 | [Quantum Random Cryptographic Keys](./experiments/008-quantum-random-keys/) | 2026-01-04 | 10/10 | 🟢 |
 | 005 | [Executing Python Code from Audio Waveforms](./experiments/005-audio-executable/) | 2026-01-01 | 9/10 | 🟢 |
 | 004 | [Executing Machine Code from a PNG Image](./experiments/004-executable-image/) | 2026-01-01 | 10/10 | 🟢 |

@@ -1,0 +1,150 @@
+======================================================================
+EXPERIMENT #009: STEGANOGRAPHY IN CODE (FINAL)
+Hiding encrypted messages in working Python programs
+======================================================================
+
+[STEP 1] Original Python Program
+----------------------------------------------------------------------
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n-1)
+
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+def main():
+    print("Fibonacci(10):", fibonacci(10))
+    print("Factorial(5):", factorial(5))
+    print("Is 17 prime?", is_prime(17))
+
+if __name__ == "__main__":
+    main()
+
+----------------------------------------------------------------------
+Program length: 507 chars, 25 lines
+
+[STEP 2] Verify Original Program Executes
+----------------------------------------------------------------------
+Fibonacci(10): 55
+Factorial(5): 120
+Is 17 prime? True
+----------------------------------------------------------------------
+
+[STEP 3] Encode Secret Message in Code
+----------------------------------------------------------------------
+[ENCODE] Original message: QUANTUM_KEYS_AT_ANU_EDU_AU
+[ENCODE] Message length: 26 chars
+[ENCODE] Encrypted: '\x00\x00\x00\x00\x00\x00\x00\x0e\x1e\x04\x17\x07\n\x0c\x05\n\x00\x00\x01\n\x08\x15\x00\x1e\x0f\x01'
+[ENCODE] Binary length: 208 bits
+[ENCODE] Binary (first 64 bits): 0000000000000000000000000000000000000000000000000000000000001110
+[ENCODE] Available lines: 26
+[ENCODE] Bits per line: 8
+[ENCODE] Total capacity: 208 bits (26 bytes)
+[ENCODE] Required capacity: 208 bits (26 bytes)
+[ENCODE] Embedded 208 bits across 26 lines
+----------------------------------------------------------------------
+
+[SAVED] Steganographic code saved to evidence/stego_program_final.py
+
+[STEP 4] Verify Steganographic Code Still Executes
+----------------------------------------------------------------------
+✓ Code is still valid Python!
+
+Executing steganographic code:
+Fibonacci(10): 55
+Factorial(5): 120
+Is 17 prime? True
+----------------------------------------------------------------------
+
+[STEP 5] Decode Hidden Message from Code
+----------------------------------------------------------------------
+[DECODE] Extracted 208 bits
+[DECODE] Binary (first 64 bits): 0000000000000000000000000000000000000000000000000000000000001110
+[DECODE] Encrypted message: '\x00\x00\x00\x00\x00\x00\x00\x0e\x1e\x04\x17\x07\n\x0c\x05\n\x00\x00\x01\n\x08\x15\x00\x1e\x0f\x01'
+[DECODE] Decrypted message: 'QUANTUM_KEYS_AT_ANU_EDU_AU'
+----------------------------------------------------------------------
+
+[STEP 6] Validation
+----------------------------------------------------------------------
+Original message:  'QUANTUM_KEYS_AT_ANU_EDU_AU'
+Decoded message:   'QUANTUM_KEYS_AT_ANU_EDU_AU'
+Match: True
+
+✓✓✓ SUCCESS! Message perfectly recovered! ✓✓✓
+
+Original code size: 507 bytes
+Stego code size:    715 bytes
+Overhead:           208 bytes (41.0%)
+----------------------------------------------------------------------
+
+[STEP 7] Visual Comparison
+----------------------------------------------------------------------
+ORIGINAL (first 150 chars):
+'def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)\n\ndef factorial(n):\n    if n == 0:\n        return 1\n    re'
+
+STEGANOGRAPHIC (first 150 chars):
+'def fibonacci(n):        \n    if n <= 1:        \n        return n        \n    return fibonacci(n-1) + fibonacci(n-2)        \n        \ndef factorial(n)'
+
+Notice: The stego version has invisible tabs and spaces at line ends!
+----------------------------------------------------------------------
+
+[STEP 8] Forensic Analysis - Hex Comparison
+----------------------------------------------------------------------
+Original first line: 'def fibonacci(n):'
+Hex: 646566206669626f6e61636369286e293a
+
+Stego first line: 'def fibonacci(n):        '
+Hex: 646566206669626f6e61636369286e293a2020202020202020
+
+The difference is in the trailing whitespace (invisible to humans)
+----------------------------------------------------------------------
+
+[STEP 9] External Proof
+----------------------------------------------------------------------
+Testing steganographic code execution...
+STDOUT:
+Fibonacci(10): 55
+Factorial(5): 120
+Is 17 prime? True
+
+Exit code: 0
+
+✓ Both programs saved to evidence/
+----------------------------------------------------------------------
+
+======================================================================
+EXPERIMENT COMPLETE
+======================================================================
+
+RESULTS:
+  ✓ Hidden message: 26 characters
+  ✓ Encoding method: Multi-bit whitespace steganography
+  ✓ Code still compiles: True
+  ✓ Code still executes: True
+  ✓ Message recovered: True
+  ✓ Overhead: 208 bytes (41.0%)
+
+WHAT THIS PROVES:
+  1. You can hide encrypted data in working source code
+  2. The code remains fully functional after modification
+  3. The hidden data is invisible to human code review
+  4. Whitespace is a covert channel in programming languages
+  5. Standard code review won't detect this
+  6. You need forensic tools (hex dumps) to find it
+
+SECURITY IMPLICATIONS:
+  • Malicious code could hide payloads in legitimate programs
+  • Data exfiltration through code commits
+  • Covert communication via open-source repositories
+  • Supply chain attacks hiding in plain sight
